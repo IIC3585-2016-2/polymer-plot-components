@@ -1,0 +1,61 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="plot-area">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        position: relative;
+        margin-top: 10px;
+      }
+    </style>
+
+    <content></content>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'plot-area',
+
+      properties: {
+        width: {
+          type: Number,
+          value: 300,
+        },
+        computedWidth: {
+          type: Number,
+          computed: "computeWidth(width)"
+        },
+        height: {
+          type: Number,
+          value: 200
+        },
+        computedHeight: {
+          type: Number,
+          computed: "computeHeight(height)"
+        },
+        xmin: {
+          type: Number,
+          value: 0
+        },
+        xmax: {
+          type: Number,
+          value: 100
+        }
+      },
+
+      ready: function(){
+        // Definimos via JS para evitar tener que hacerlo con un div con styling en el template.
+        this.root.host.style.height = this.computedHeight+"px";
+        this.root.host.style.width = this.computedWidth+"px";
+      },
+
+      computeWidth: function(w) {
+        return w + 50;
+      },
+      computeHeight: function(h) {
+        return h + 40;
+      }
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,102 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="plot-line">
+  <template>
+    <style>
+      :host {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+      }
+
+      #content-area {
+        display: block;
+      }
+    </style>
+
+  </template>
+
+  <script>
+    var linspace = function(start, stop, nsteps) {
+      delta = (stop-start)/(nsteps-1)
+      return d3.range(nsteps).map(function(i){return start+i*delta;});
+    }
+
+    Polymer({
+      is: 'plot-line',
+
+      properties: {
+        formula: {
+          type: String,
+          value: "0"
+        },
+        lineColor: {
+          type: String,
+          value: "blue"
+        },
+        steps: {
+          type: Number,
+          value: 200
+        }
+      },
+
+      computeXMin: function(){
+        return this.root.host.parentNode.computeXMin();
+      },
+      computeXMax: function(){
+        return this.root.host.parentNode.computeXMax();
+      },
+      computeYMin: function(){
+        return this.root.host.parentNode.ymin;
+      },
+      computeYMax: function(){
+        return this.root.host.parentNode.ymax;
+      },
+
+      attached: function(){
+        console.log(this.computeXMax());
+
+        let w = Polymer.dom(this.root).node.host.offsetWidth;
+        let h = Polymer.dom(this.root).node.host.offsetHeight;
+
+
+        var x_scale = d3.scaleLinear()
+                      .domain([this.computeXMin(), this.computeXMax()])
+                      .range([0, w - 50]);
+
+        var y_scale = d3.scaleLinear()
+                      .domain([this.computeYMin(), this.computeYMax()])
+                      .range([h - 40, 0]);
+
+        // Parsing de la formula (string) a una funcion de javascript evaluable
+        var f = math.compile(this.formula);
+
+        var points = linspace(this.computeXMin(), this.computeXMax(), this.steps);
+
+        var lineData = points.map(function(d){
+          return {"x": d, "y": f.eval({x: d})};
+        });
+
+        var lineFunction = d3.line()
+                              .curve(d3.curveCatmullRom)
+                              .x(function(d) {return x_scale(d.x);})
+                              .y(function(d) {return y_scale(d.y);});
+
+        var svgContainer = d3.select(Polymer.dom(this.root).node.host) // We use Polymer $ selector
+                              .append("svg")              // to get the actual DOM element.
+                              .attr("width", w)         // Using "#..." will be bugged.
+                              .attr("height", h);
+
+        var lineGraph = svgContainer.append("path")
+                          .attr("d", lineFunction(lineData))
+                          .attr("stroke", this.lineColor)
+                          .attr("stroke-width", 2)
+                          .attr("fill", "none")
+                          .attr("transform", "translate(25, 15)");
+      }
+    });
+  </script>
+</dom-module>

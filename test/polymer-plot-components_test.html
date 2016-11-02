@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>polymer-plot-components test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../plot-components.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <plot-canvas>
+          <plot-title>Example Plot</plot-title>
+
+          <!-- Set a plot area with your own range and dimensions in pixels -->
+          <plot-area width="500" height="200" xmin="0" xmax="10">
+            <!-- Draw axis as you wish -->
+            <plot-x-axis></plot-x-axis>
+
+            <!-- Group lines in the same axis -->
+            <plot-y-axis ymin="-1" ymax="1">
+              <!-- Each line is easily customizable -->
+              <plot-line formula="(0.1*x)^2" line-color="red"></plot-line>
+              <plot-line formula="sin(x)" line-color="green"></plot-line>
+            </plot-y-axis>
+          </plot-area>
+
+          <!-- Break the line for a subplot -->
+          <br/>
+
+          <!-- Stack them as you wish. Subplotting is easy -->
+          <plot-area width="230" height="200" xmin="-1" xmax="1">
+            <plot-x-axis></plot-x-axis>
+            <plot-y-axis ymin="-1" ymax="1">
+              <plot-line formula="x^3" line-color="orange"></plot-line>
+            </plot-y-axis>
+          </plot-area>
+
+          <plot-area width="230" height="200" xmin="0" xmax="1">
+            <plot-x-axis></plot-x-axis>
+            <plot-y-axis ymin="0" ymax="1">
+              <plot-line formula="sqrt(x)" line-color="blue"></plot-line>
+              <plot-line formula="x^2" line-color="red"></plot-line>
+            </plot-y-axis>
+          </plot-area>
+        </plot-canvas>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('plot-canvas', function() {
+
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'plot-canvas');
+        });
+
+      });
+    </script>
+  </body>
+</html>

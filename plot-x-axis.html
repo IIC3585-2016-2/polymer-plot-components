@@ -1,0 +1,59 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="plot-x-axis">
+  <template>
+    <style>
+      :host {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+      }
+
+      #x_axis {
+        width: 100%;
+        height: 100%;
+        display: block;
+        background-color: transparent !important;
+      }
+
+    </style>
+
+    <div id="x_axis"></div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'plot-x-axis',
+
+      computeXMin: function(){
+        return this.root.host.parentNode.xmin;
+      },
+
+      computeXMax: function(){
+        return this.root.host.parentNode.xmax;
+      },
+
+      attached: function(){
+
+        let w = Polymer.dom(this.root).node.host.offsetWidth;
+        let h = Polymer.dom(this.root).node.host.offsetHeight;
+
+        // Definimos el eje x
+        var x_scale = d3.scaleLinear()
+                      .domain([this.computeXMin(), this.computeXMax()])
+                      .range([0, this.root.host.parentNode.width]);
+
+        var svg = d3.select(this.$.x_axis)
+          .append("svg")
+          .attr("width", w)
+          .attr("height", h)
+          .append("g")
+          .attr("transform", "translate(25, " + (h-25) + ")") // Jst in line with plots
+          .call(d3.axisBottom(x_scale)); // Just add the damn scale
+      }
+    });
+  </script>
+</dom-module>

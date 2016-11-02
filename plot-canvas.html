@@ -1,0 +1,27 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="plot-canvas">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        text-align: center;
+      }
+
+      .canvas {
+        display: inline-block;
+        border: var(--plot-canvas-border-color, black) var(--plot-canvas-border-width, 1px) var(--plot-canvas-border-style, solid);
+        padding: 20px;
+      }
+    </style>
+    <div class="canvas">
+      <content></content>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'plot-canvas'
+    });
+  </script>
+</dom-module>

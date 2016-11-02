@@ -1,0 +1,26 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="plot-title">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        font-size: var(--plot-title-font-size, 24px);
+        font-family: var(--plot-title-font-family, sans-serif);
+      }
+    </style>
+    <h1><content></content></h1>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'plot-title',
+    });
+  </script>
+</dom-module>
