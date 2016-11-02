@@ -68,16 +68,39 @@ Put this inside anywhere in your document body. You should expect the result to 
 </plot-canvas>
 ```
 
+You could expect something like this if everything is okay:
+
+ !["Example test"](doc/example1.png "Example test")
+
 ## Component reference
 
 A description for using one of each component is described here. ***In construction!***
 
 ### plot-canvas
+
+This is the basic canvas structure. It loads the styling and .js libraries, so don't trye using any other component of this library that's not inside this tag.
+
 ### plot-title
+
+Sets the title of the plot. Just an `<h1>` with custom styling that you can locate everywhere you want, but usually is on top of the plot :).
+
 ### plot-area
+
+Sets a plot area for drawing lines. You must specify its dimensions (`width` and `height`) and the range of `x` where the structure is plotted (`xmin` and `xmax`). The component will do the voodoo of mapping `x` to de plot area (in pixels).
+
+The creation of this component allow you to setup a lot of different plot areas to make sub-plots in the same canvas easily.
+
 ### plot-x-axis
+
+Just draws the x axis. If you don't want it in your plot area, don't include it.
+
 ### plot-y-axis
+
+Draws an y axis and sets the limit of ymin and ymax. **You must use it to specify plot lines or otherwise they won't work properly.** If you don't want to toggle the axis itself just set `display-axis` property to `false`.
+
 ### plot-line
+
+Draws a line inside the plot area. **It must be inside a `<plot-y-axis>` to set image domain and work properly.** You must specify a formula at least. Don't expect this to wowrk otherwise.
 
 ## License
 
