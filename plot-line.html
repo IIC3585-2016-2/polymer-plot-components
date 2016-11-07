@@ -37,6 +37,14 @@
           type: String,
           value: "blue"
         },
+        lineWidth: {
+          type: Number,
+          value: 2
+        },
+        lineDashArray: {
+          type: String,
+          value: "3"
+        },
         steps: {
           type: Number,
           value: 200
@@ -57,8 +65,7 @@
       },
 
       attached: function(){
-        console.log(this.computeXMax());
-
+        // Calculate width and height.
         let w = Polymer.dom(this.root).node.host.offsetWidth;
         let h = Polymer.dom(this.root).node.host.offsetHeight;
 
@@ -93,7 +100,8 @@
         var lineGraph = svgContainer.append("path")
                           .attr("d", lineFunction(lineData))
                           .attr("stroke", this.lineColor)
-                          .attr("stroke-width", 2)
+                          .attr("stroke-width", this.lineWidth)
+                          .style("stroke-dasharray", this.lineDashArray)
                           .attr("fill", "none")
                           .attr("transform", "translate(25, 15)");
       }

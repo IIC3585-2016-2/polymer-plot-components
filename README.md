@@ -2,7 +2,7 @@
 
 A highly modular and configurable symbolic plotter for Polymer. Plotting analytic functions in HTML has never been so easy thanks to SVG, Math.js and D3.js. You may see Polymer as the glue that makes plotting this easy.
 
-#### Wait there, why this in the first place if Google Chart already exists as a Polymer Component?
+#### Wait there, why this in the first place if Google Charts already exists as a Polymer Component?
 
 This is **not** the same as Google Charts. Google Charts is used for plotting **numerical data** in a lot of fashions, Polymer Plot Components is a tool for plotting **symbolical data** as curves.
 
