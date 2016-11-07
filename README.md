@@ -102,6 +102,14 @@ Draws an y axis and sets the limit of ymin and ymax. **You must use it to specif
 
 Draws a line inside the plot area. **It must be inside a `<plot-y-axis>` to set image domain and work properly.** You must specify a formula at least. Don't expect this to wowrk otherwise.
 
+Properties:
+
+-   `formula`: formula to be plotted. Use [this](http://mathjs.org/docs/expressions/syntax.html) syntax.
+-   `line-color`: line color in css or hex.
+-   `line-width`: line width of plotted line.
+-   `line-dash-array`: line dash style using [svg-dasharray](https://developer.mozilla.org/en/docs/Web/SVG/Attribute/stroke-dasharray) format.
+-   `steps` number of steps to interpolate the line in the range used. If the curve looks weird, increase this number.
+
 ## License
 
 BSD License. Check LICENSE.md for more information.
