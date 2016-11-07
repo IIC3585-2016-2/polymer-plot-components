@@ -107,8 +107,12 @@
       },
 
       // Make line when attached or attribute changes.
-      attached: this.drawLine,
-      attributeChanged: this.drawLine
+      attached: function() {
+        this.drawLine();
+      },
+      attributeChanged: function(){
+        this.drawLine();
+      }
     });
   </script>
 </dom-module>
