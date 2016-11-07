@@ -64,7 +64,7 @@
         return this.root.host.parentNode.ymax;
       },
 
-      attached: function(){
+      drawLine: function(){
         // Calculate width and height.
         let w = Polymer.dom(this.root).node.host.offsetWidth;
         let h = Polymer.dom(this.root).node.host.offsetHeight;
@@ -104,7 +104,12 @@
                           .style("stroke-dasharray", this.lineDashArray)
                           .attr("fill", "none")
                           .attr("transform", "translate(25, 15)");
-      }
+        }
+      },
+
+      // Make line when attached or attribute changes.
+      attached: this.drawLine,
+      attributeChanged: this.drawLine
     });
   </script>
 </dom-module>
